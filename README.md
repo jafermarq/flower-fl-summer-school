@@ -68,7 +68,7 @@ flwr run .
 flwr run . --run-config="wandb-token='<YOUR-TOKEN>'"
 
 # Login in ResearchGrid (note you should have registered in flower.ai first)
-flwr login . researchgrid --stream
+flwr login . researchgrid
 
 # Run in Flower's ResearchGrid
 flwr run . researchgrid --stream --run-config="wandb-token='<YOUR-TOKEN>'"
