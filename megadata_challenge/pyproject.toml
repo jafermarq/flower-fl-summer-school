@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "megadata-challenge"
+version = "1.0.0"
+description = ""
+license = "Apache-2.0"
+dependencies = [
+    "flwr>=1.19.0",
+    "datasets==3.1.0",
+    "torch==2.6.0",
+    "torchvision==0.21.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+
+[tool.flwr.app]
+publisher = "flwrlabs"
+
+[tool.flwr.app.components]
+serverapp = "app_pytorch.server_app:app"
+clientapp = "app_pytorch.client_app:app"
+
+[tool.flwr.app.config]
+num-server-rounds = 5
+fraction-sample = 1.0
+local-epochs = 1
+use-wandb = true
+wandb-token = ""
+
+[tool.flwr.federations]
+default = "megadatagrid"
+
+[tool.flwr.federations.megadatagrid]
+address = "megadata-exec.flower.ai"
+enable-user-auth = true
+options.num-supernodes = 20
